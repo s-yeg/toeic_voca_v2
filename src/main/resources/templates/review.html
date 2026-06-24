@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>REVIEW</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>REVIEW</h1>
+
+    <div class="top-buttons">
+    <a class="btn" href="/">HOME</a>
+
+        <a class="btn" href="/review/clear">
+            오답노트 비우기
+        </a>
+
+    </div>
+
+    <h2>틀린 단어</h2>
+
+    <ul>
+
+        <li th:each="wrongWord : ${wrongWords}">
+
+
+            <span th:text="${wrongWord.word}"></span>
+            -
+            <span th:text="${wrongWord.meaning}"></span>
+        </li>
+    </ul>
+
+</div>
+
+</body>
+</html>

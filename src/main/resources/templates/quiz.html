@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>QUIZ</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>QUIZ</h1>
+
+    <div class="top-buttons">
+    <a class="btn" href="/">HOME</a>
+    <a class="btn" href="/day?type=quiz">DAY</a>
+    </div>
+
+    <h2 id="word"></h2>
+
+    <p>뜻을 고르세요.</p>
+
+    <div id="choices"></div>
+
+    <h3 id="result"></h3>
+
+</div>
+
+<script th:inline="javascript">
+    const words = [[${words}]];
+
+    const quizList = words.map(function(word) {
+        const wrongChoices = words
+            .filter(function(item) {
+                return item.meaning !== word.meaning;
+            })
+            .map(function(item) {
+                return item.meaning;
+            })
+            .sort(function() {
+                return Math.random() - 0.5;
+            })
+            .slice(0, 3);
+
+        return {
+            word: word.word,
+            answer: word.meaning,
+            choices: [word.meaning, ...wrongChoices]
+        };
+    });
+
+    let currentIndex = 0;
+    let score = 0;
+
+
+    function showQuestion() {
+        const quiz = quizList[currentIndex];
+
+        document.getElementById("word").innerText = quiz.word;
+        document.getElementById("result").innerText = "";
+
+        const choicesDiv = document.getElementById("choices");
+        choicesDiv.innerHTML = "";
+
+        const shuffledChoices = [...quiz.choices].sort(function() {
+            return Math.random() - 0.5;
+        });
+
+        shuffledChoices.forEach(function(choice) {
+            const button = document.createElement("button");
+            button.className = "btn";
+            button.innerText = choice;
+
+            button.onclick = function() {
+                checkAnswer(choice);
+            };
+
+            choicesDiv.appendChild(button);
+        });
+    }
+
+    function checkAnswer(choice) {
+        const quiz = quizList[currentIndex];
+
+        if (choice === quiz.answer) {
+            score++;
+            alert("정답입니다!");
+        } else {
+            saveWrongWord(quiz);
+            alert("오답입니다! 정답은 " + quiz.answer + " 입니다.");
+        }
+
+        currentIndex++;
+
+        if (currentIndex < quizList.length) {
+            showQuestion();
+        } else {
+            document.getElementById("word").innerText = "퀴즈 완료!";
+            document.getElementById("choices").innerHTML = "";
+            document.getElementById("result").innerText =
+                "점수: " + score + " / " + quizList.length;
+        }
+    }
+
+    function saveWrongWord(quiz) {
+        fetch("/wrong-word", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                word: quiz.word,
+                meaning: quiz.answer
+            })
+        });
+    }
+
+    showQuestion();
+</script>
+
+</body>
+</html>

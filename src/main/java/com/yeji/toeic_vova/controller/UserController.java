@@ -38,18 +38,26 @@ public class UserController {
     @PostMapping("/signup")
     public String signup(User user, Model model) {
 
-        if (userRepository.existsByUsername(user.getUsername())) {
+        String username = user.getUsername() == null ? "" : user.getUsername().trim();
+        String password = user.getPassword() == null ? "" : user.getPassword().trim();
 
-            model.addAttribute("error", "이미 있는 아이디입니다.");
-
+        if (username.isEmpty() || password.isEmpty()) {
+            model.addAttribute("error", "아이디와 비밀번호를 입력하세요.");
             return "signup";
         }
+
+        if (userRepository.existsByUsername(username)) {
+            model.addAttribute("error", "이미 있는 아이디입니다.");
+            return "signup";
+        }
+
+        user.setUsername(username);
+        user.setPassword(password);
 
         userRepository.save(user);
 
         return "redirect:/";
     }
-
     @PostMapping("/login")
     public String login(User user, Model model, HttpSession session) {
 

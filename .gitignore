@@ -40,3 +40,5 @@ out/
 words.sql
 page2.txt
 result.txt
+
+src/main/resources/application-local.yaml

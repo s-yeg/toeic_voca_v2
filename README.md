@@ -1,77 +1,145 @@
-# TOEIC VOCA V1
+<div align="center">
 
-800+ 토익 보카 암기 웹 애플리케이션 (Spring Boot)
+# 📚 TOEIC VOCA V1
 
-## 프로젝트 소개
+### TOEIC Vocabulary Learning Web Application
 
-토익 단어 암기를 효율적으로 학습하기 위해 개발한 웹 애플리케이션
+> Spring Boot와 MySQL을 활용한 토익 단어 학습 웹 애플리케이션 **[ Ver.1 ]**
 
-Day별 단어 조회, 객관식 퀴즈, 오답노트 기능을 제공하며 Spring Boot와 MySQL을 활용
+<br>
 
-## 사용 기술
+![Java](https://img.shields.io/badge/Java-17-orange?style=for-the-badge)
+![Spring Boot](https://img.shields.io/badge/SpringBoot-3.x-success?style=for-the-badge)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-blue?style=for-the-badge)
+![JPA](https://img.shields.io/badge/Spring_Data_JPA-Hibernate-success?style=for-the-badge)
+![Thymeleaf](https://img.shields.io/badge/Thymeleaf-3.1-green?style=for-the-badge)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge)
 
-- Java 17
-- Spring Boot
-- MySQL
-- Spring Data JPA
-- Thymeleaf
-- HTML
-- CSS
-- JavaScript
-- Git / GitHub
+</div>
 
-## 주요 기능
+---
 
-### HOME 화면
+# 📖 Project Overview
 
-![Home](images/home.png)
+TOEIC 단어를 **Day별로 학습**하고 객관식 퀴즈를 통해 학습 내용을 확인할 수 있는 웹 애플리케이션입니다.
 
-### DAY 선택 화면
+오답노트를 이용한 반복 학습 기능을 제공하며, Spring Boot와 MySQL을 활용하여 구현하였습니다.
 
-![Day](images/day.png)
+---
 
-### 단어 학습 화면
+# ✨ Features
 
-![Words](images/words.png)
+| 기능 | 설명 |
+|------|------|
+| 📅 Day 선택 | Day별 단어 학습 |
+| 📖 Words | 선택한 Day 단어 조회 |
+| 📝 Quiz | 객관식 단어 퀴즈 |
+| 📒 Review | 틀린 단어 복습 |
+| 💾 MySQL | 단어 데이터 관리 |
 
-### 퀴즈 화면
+---
 
-![Quiz](images/quiz.png)
+# 🛠 Tech Stack
 
-### 오답노트 화면
+| Category | Technology |
+|-----------|------------|
+| Backend | Java 17, Spring Boot |
+| Database | MySQL |
+| ORM | Spring Data JPA |
+| Template | Thymeleaf |
+| Frontend | HTML, CSS, JavaScript |
+| Tool | Git, GitHub, IntelliJ IDEA |
 
-![Review](images/review.png)
+---
 
-## 기능 설명
+# 📷 Screen
 
-### 1. Day별 단어 조회
+<table>
+<tr>
+<td align="center">
+<b>HOME</b><br>
+<img src="screenshots/home.png" width="430">
+</td>
 
-사용자가 원하는 Day를 선택 시 해당 Day에 저장된 단어 목록 조회
+<td align="center">
+<b>DAY</b><br>
+<img src="screenshots/day.png" width="430">
+</td>
+</tr>
 
-### 2. 객관식 퀴즈
+<tr>
+<td align="center">
+<b>WORDS</b><br>
+<img src="screenshots/words.png" width="430">
+</td>
 
-DB에 저장된 단어 데이터를 기반으로 객관식 퀴즈를 제공
+<td align="center">
+<b>QUIZ</b><br>
+<img src="screenshots/quiz.png" width="430">
+</td>
+</tr>
+</table>
 
-### 3. 오답노트
+---
 
-틀린 단어를 오답노트에 저장하여 복습할 수 있도록 구성
+# 🔄 Application Flow
 
-### 4. 데이터 관리
+```text
+HOME
+   │
+   ▼
+DAY Selection
+   │
+   ├────────► WORDS
+   │
+   ├────────► QUIZ
+   │
+   ▼
+REVIEW
+```
 
-MySQL을 사용하여 단어 및 오답 데이터를 관리
+---
 
-## GitHub 공개 시 데이터 처리
+# 💾 Database
 
-저작권 이슈를 고려하여 실제 학습 데이터(단어 데이터)와 원본 PDF 파일은 
-GitHub에 포함하지 않았습니다.
+| Table | Description |
+|--------|-------------|
+| words | 토익 단어 데이터 |
+| wrong_words | 오답노트 데이터 |
 
-공개 저장소에는 프로젝트 소스 코드와 화면 캡처 이미지만 포함했습니다.
+---
 
-## 향후 개선 계획
+# ⚠ Copyright
+
+저작권 이슈를 고려하여
+
+- 실제 토익 단어 데이터
+- 원본 PDF
+
+는 GitHub 저장소에 포함하지 않았습니다.
+
+공개 저장소에는 프로젝트 소스코드와 화면 캡처 이미지만 포함되어 있습니다.
+(해커스 보카 참고)
+
+---
+
+# 🚀 Future Plan
+
 ### Version 2
 
-- 로그인 기능
-- 회원가입 기능
-- 사용자별 학습 기록 관리
-- 사용자별 오답노트 관리
-- 점수 기능 개선
+- 회원가입
+- 로그인
+- Session 관리
+- 사용자별 오답노트
+- 사용자별 학습기록
+- 점수 저장 기능
+
+---
+
+<div align="center">
+
+Made with 💜 by **손예지**
+
+</div>

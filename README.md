@@ -60,26 +60,34 @@ TOEIC 단어를 **Day별로 학습**하고 객관식 퀴즈를 통해 학습 내
 <tr>
 <td align="center">
 <b>HOME</b><br>
-<img src="images/home.png" width="430">
+<img src="images/homev1.png" width="430">
 </td>
 
 <td align="center">
 <b>DAY</b><br>
-<img src="images/day.png" width="430">
+<img src="images/dayv1.png" width="430">
 </td>
 </tr>
 
 <tr>
 <td align="center">
 <b>WORDS</b><br>
-<img src="images/words.png" width="430">
+<img src="images/wordsv1.png" width="430">
 </td>
 
 <td align="center">
 <b>QUIZ</b><br>
-<img src="images/quiz.png" width="430">
+<img src="images/quizv1.png" width="430">
 </td>
 </tr>
+
+<tr>
+<td align="center">
+<b>REVIEW</b><br>
+<img src="images/reviewv1.png" width="430">
+</td>
+</tr>
+
 </table>
 
 ---

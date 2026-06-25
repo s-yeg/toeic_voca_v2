@@ -14,7 +14,7 @@ public class HomeController {
 
         User loginUser = (User) session.getAttribute("loginUser");
 
-      
+
         if (loginUser == null) {
             return "redirect:/login";
         }

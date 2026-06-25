@@ -1,4 +1,4 @@
-````md
+
 <div align="center">
 
 # 📚 TOEIC VOCA V2
@@ -134,4 +134,4 @@ DAY Selection
 (해커스 보카 참고)
 
 ---
-````
+

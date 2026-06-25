@@ -3,8 +3,8 @@ package com.yeji.toeic_vova.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "wrong_words")
-public class WrongWord {
+@Table(name = "quiz_scores")
+public class QuizScore {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,9 +13,7 @@ public class WrongWord {
     @Column(name = "day_no")
     private Integer dayNo;
 
-    private String word;
-
-    private String meaning;
+    private Integer score;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -33,20 +31,12 @@ public class WrongWord {
         this.dayNo = dayNo;
     }
 
-    public String getWord() {
-        return word;
+    public Integer getScore() {
+        return score;
     }
 
-    public void setWord(String word) {
-        this.word = word;
-    }
-
-    public String getMeaning() {
-        return meaning;
-    }
-
-    public void setMeaning(String meaning) {
-        this.meaning = meaning;
+    public void setScore(Integer score) {
+        this.score = score;
     }
 
     public User getUser() {

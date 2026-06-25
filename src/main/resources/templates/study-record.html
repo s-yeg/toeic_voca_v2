@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>STUDY RECORD</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>STUDY RECORD</h1>
+
+  <div class="top-buttons">
+    <a class="btn" href="/">HOME</a>
+  </div>
+
+  <h2 th:text="${username} + '님의 학습 기록'"></h2>
+
+  <div>
+    <h3>진도율</h3>
+    <p th:text="${progress} + '%'"></p>
+  </div>
+
+  <div>
+    <h3>점수 기록</h3>
+
+    <table>
+      <tr>
+        <th>DAY</th>
+        <th>최고 점수</th>
+      </tr>
+
+      <tr th:each="score : ${scoreList}">
+        <td th:text="'DAY ' + ${score.dayNo}"></td>
+        <td th:text="${score.score} + '점'"></td>
+      </tr>
+    </table>
+  </div>
+
+</div>
+
+</body>
+</html>

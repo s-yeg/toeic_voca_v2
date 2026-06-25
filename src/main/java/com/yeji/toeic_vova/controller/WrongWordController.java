@@ -1,7 +1,9 @@
 package com.yeji.toeic_vova.controller;
 
+import com.yeji.toeic_vova.entity.User;
 import com.yeji.toeic_vova.entity.WrongWord;
 import com.yeji.toeic_vova.repository.WrongWordRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,11 +18,23 @@ public class WrongWordController {
 
     @PostMapping("/wrong-word")
     @ResponseBody
-    public void saveWrongWord(@RequestBody WrongWord wrongWord) {
+    public void saveWrongWord(
+            @RequestBody WrongWord wrongWord,
+            HttpSession session) {
 
-        if (!wrongWordRepository.existsByWord(wrongWord.getWord())) {
-            wrongWordRepository.save(wrongWord);
+        User loginUser = (User) session.getAttribute("loginUser");
+
+        if (loginUser == null) {
+            return;
         }
 
+        wrongWord.setUser(loginUser);
+
+        if (!wrongWordRepository.existsByWordAndUser(
+                wrongWord.getWord(),
+                loginUser)) {
+
+            wrongWordRepository.save(wrongWord);
+        }
     }
 }

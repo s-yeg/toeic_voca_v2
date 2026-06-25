@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>REVIEW</title>
@@ -13,26 +13,26 @@
     <h1>REVIEW</h1>
 
     <div class="top-buttons">
-    <a class="btn" href="/">HOME</a>
-
-        <a class="btn" href="/review/clear">
-            오답노트 비우기
-        </a>
-
+        <a class="btn" href="/">HOME</a>
+        <a class="btn" href="/day?type=review">DAY</a>
+        <a class="btn" href="/review/clear">오답노트 비우기</a>
     </div>
 
-    <h2>틀린 단어</h2>
+    <div th:if="${selectedDay == null}">
+        <h2>DAY를 선택해 주세요.</h2>
+    </div>
 
-    <ul>
+    <div th:if="${selectedDay != null}">
+        <h2 th:text="'DAY ' + ${selectedDay} + ' 오답노트'"></h2>
 
-        <li th:each="wrongWord : ${wrongWords}">
-
-
-            <span th:text="${wrongWord.word}"></span>
-            -
-            <span th:text="${wrongWord.meaning}"></span>
-        </li>
-    </ul>
+        <ul>
+            <li th:each="wrongWord : ${wrongWords}">
+                <span th:text="${wrongWord.word}"></span>
+                -
+                <span th:text="${wrongWord.meaning}"></span>
+            </li>
+        </ul>
+    </div>
 
 </div>
 

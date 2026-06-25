@@ -1,5 +1,6 @@
 package com.yeji.toeic_vova.controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +12,12 @@ public class DayController {
     @GetMapping("/day")
     public String day(
             @RequestParam String type,
-            Model model) {
+            Model model,
+            HttpSession session) {
+
+        if (session.getAttribute("loginUser") == null) {
+            return "redirect:/login";
+        }
 
         model.addAttribute("type", type);
 

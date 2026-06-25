@@ -13,13 +13,13 @@
     <h1>QUIZ</h1>
 
     <div class="top-buttons">
-    <a class="btn" href="/">HOME</a>
-    <a class="btn" href="/day?type=quiz">DAY</a>
+        <a class="btn" href="/">HOME</a>
+        <a class="btn" href="/day?type=quiz">DAY</a>
     </div>
 
     <h2 id="word"></h2>
 
-    <p>뜻을 고르세요.</p>
+    <p id="m">뜻을 고르세요.</p>
 
     <div id="choices"></div>
 
@@ -27,8 +27,11 @@
 
 </div>
 
+<div id="toast"></div>
+
 <script th:inline="javascript">
     const words = [[${words}]];
+    const dayNo = [[${day}]];
 
     const quizList = words.map(function(word) {
         const wrongChoices = words
@@ -52,7 +55,6 @@
 
     let currentIndex = 0;
     let score = 0;
-
 
     function showQuestion() {
         const quiz = quizList[currentIndex];
@@ -85,21 +87,28 @@
 
         if (choice === quiz.answer) {
             score++;
-            alert("정답입니다!");
+            showToast("정답입니다!");
         } else {
             saveWrongWord(quiz);
-            alert("오답입니다! 정답은 " + quiz.answer + " 입니다.");
+            showToast("오답입니다! 정답은 " + quiz.answer + " 입니다.");
         }
 
         currentIndex++;
 
         if (currentIndex < quizList.length) {
-            showQuestion();
+            setTimeout(function() {
+                showQuestion();
+            }, 700);
         } else {
-            document.getElementById("word").innerText = "퀴즈 완료!";
-            document.getElementById("choices").innerHTML = "";
-            document.getElementById("result").innerText =
-                "점수: " + score + " / " + quizList.length;
+            setTimeout(function() {
+                document.getElementById("word").innerText = "퀴즈 완료!";
+                document.getElementById("choices").innerHTML = "";
+                document.getElementById("m").innerHTML = "";
+                document.getElementById("result").innerText =
+                    "점수: " + score + " / " + quizList.length;
+
+                saveQuizScore();
+            }, 700);
         }
     }
 
@@ -110,10 +119,35 @@
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
+                dayNo: dayNo,
                 word: quiz.word,
                 meaning: quiz.answer
             })
         });
+    }
+
+    function saveQuizScore() {
+        fetch("/quiz-score", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                dayNo: dayNo,
+                score: score
+            })
+        });
+    }
+
+    function showToast(message) {
+        const toast = document.getElementById("toast");
+
+        toast.innerText = message;
+        toast.className = "show";
+
+        setTimeout(function() {
+            toast.className = "";
+        }, 1200);
     }
 
     showQuestion();

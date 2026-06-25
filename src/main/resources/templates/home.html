@@ -10,6 +10,11 @@
 
 <div class="container">
 
+
+    <p th:if="${loginUser}">
+        <span th:text="${loginUser.username}"></span>님 환영합니다.
+    </p>
+
     <h1>HOME</h1>
 
     <button class="btn" onclick="location.href='/words'">WORDS</button>
@@ -18,7 +23,13 @@
 
     <button class="btn" onclick="location.href='/review'">REVIEW</button>
 
+    <button class="btn" onclick="location.href='/study-record'">STUDY RECORD</button>
+
+    <a href="/logout">로그아웃</a>
+
 </div>
+
+
 
 </body>
 </html>

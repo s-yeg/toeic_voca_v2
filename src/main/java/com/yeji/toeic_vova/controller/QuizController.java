@@ -25,7 +25,8 @@ public class QuizController {
                        HttpSession session) {
 
         if (session.getAttribute("loginUser") == null) {
-            return "redirect:/login";
+
+           return "redirect:/login";
         }
 
         List<Word> words = wordRepository.findByDayNo(day);

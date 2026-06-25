@@ -11,12 +11,16 @@ public class DayController {
 
     @GetMapping("/day")
     public String day(
-            @RequestParam String type,
+            @RequestParam(required = false) String type,
             Model model,
             HttpSession session) {
 
         if (session.getAttribute("loginUser") == null) {
             return "redirect:/login";
+        }
+
+        if (type == null || type.isBlank()) {
+            return "redirect:/";
         }
 
         model.addAttribute("type", type);
